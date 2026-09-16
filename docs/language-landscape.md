@@ -48,7 +48,7 @@ Sources for this table are listed in [References](#-references) below.
 
 ## 🔍 Detailed profiles — selected languages
 
-### 🥇 Fulfulde (Adamawa Fulfulde) — `fub`
+### 🥇 Fulfulde (Adamawa, fub)
 
 ```text
 Fulfulde (Adamawa)
@@ -71,7 +71,7 @@ Fulfulde (Adamawa)
 
 **Why it matters:** Fulfulde is the largest indigenous language of Cameroon by a wide margin and the primary lingua franca of the three northern regions, spoken across borders in Nigeria, Chad, and CAR. It is linguistically very different from the two others selected (Niger-Congo, Atlantic branch, vs. Bantu/Grassfields for the other two), which is valuable for testing that CLA's tools generalize.
 
-### 🥈 Ewondo — `ewo`
+### 🥈 Ewondo (ewo)
 
 ```text
 Ewondo
@@ -92,7 +92,7 @@ Ewondo
 
 **Why it matters:** Ewondo's raw native-speaker count looks smaller than Bulu's on paper, but its role as the everyday vehicular language of Yaoundé — Cameroon's capital and one of its two largest metro areas — gives it outsized real-world reach and makes it a strong choice for a demo-ready assistant. This was the deciding factor over Bulu for CLA's second language (see [Selection Rationale](#-selection-rationale)).
 
-### 🥉 Ghomala' (Bandjoun) — `bbj`
+### 🥉 Ghomala' (Bandjoun, bbj)
 
 ```text
 Ghomala'
@@ -146,7 +146,7 @@ Languages were (and should continue to be) evaluated against:
 
 ---
 
-## ✅ Selection rationale — CLA v0.1's three languages
+## ✅ Selection rationale: CLA v0.1's three languages
 
 **CLA v0.1 will target: Fulfulde (Adamawa) · Ewondo · Ghomala' (Bandjoun).**
 

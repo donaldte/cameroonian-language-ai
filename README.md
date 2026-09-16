@@ -260,37 +260,40 @@ Where possible, benchmark datasets should be reviewed by native speakers and dom
 ## Phase 0 — Research & Community
 
 * [x] Map Cameroon's linguistic AI landscape — see [`docs/language-landscape.md`](docs/language-landscape.md)
-* [x] Select initial languages — Fulfulde, Ewondo, Ghomala' (Bandjoun); see [rationale](docs/language-landscape.md#-selection-rationale--cla-v01s-three-languages)
+* [x] Select initial languages — Fulfulde, Ewondo, Ghomala' (Bandjoun); see [rationale](docs/language-landscape.md#-selection-rationale-cla-v01s-three-languages)
 * [ ] Identify existing datasets (partially covered per-language in the landscape doc; needs a deeper pass)
 * [ ] Identify potential research partners
 * [ ] Build a community of native speakers
 * [ ] Connect with linguists and researchers
-* [ ] Define data governance principles
-* [ ] Define licensing strategy
+* [x] Define data governance principles — see [`docs/data-consent-and-licensing.md`](docs/data-consent-and-licensing.md)
+* [x] Define licensing strategy — code: Apache-2.0, data: CC-BY-4.0 (see [`docs/data-consent-and-licensing.md`](docs/data-consent-and-licensing.md#2-license))
 * [ ] Define evaluation methodology
 
 ---
 
-## Phase 1 — CLA-Data
+## Phase 1 — CLA-Data 🚧 *in progress*
 
-Build the first version of the CLA dataset.
+Build the first version of the CLA dataset for Fulfulde (`fub`), Ewondo (`ewo`), and Ghomala' Bandjoun (`bbj`).
 
 ```text
 data/
 ├── languages/
-│   ├── language-01/
-│   │   ├── text/
-│   │   ├── speech/
-│   │   ├── translations/
-│   │   └── metadata/
-│   │
-│   ├── language-02/
-│   └── language-03/
+│   ├── fub/   Fulfulde
+│   ├── ewo/   Ewondo
+│   └── bbj/   Ghomala' (Bandjoun)
+│       ├── text/
+│       ├── speech/
+│       └── metadata/
 │
-├── schemas/
-├── scripts/
-└── documentation/
+├── schemas/     ← done: text-record.schema.json, audio-record.schema.json
+└── scripts/     ← not yet written
 ```
+
+* [x] Define the CLA-Data record schemas (text + audio) — [`docs/cla-data-schema.md`](docs/cla-data-schema.md)
+* [x] Scaffold the `data/` directory for the three selected languages
+* [ ] Build validation/ingestion scripts
+* [ ] Build a collection tool (`CLA Collect`)
+* [ ] Collect and validate the first records
 
 CLA will initially focus on a **small number of languages** rather than attempting to cover all Cameroonian languages immediately.
 
