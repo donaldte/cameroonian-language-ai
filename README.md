@@ -259,14 +259,14 @@ Where possible, benchmark datasets should be reviewed by native speakers and dom
 
 ## Phase 0 — Research & Community
 
-* [ ] Map Cameroon's linguistic AI landscape
-* [ ] Identify existing datasets
+* [x] Map Cameroon's linguistic AI landscape — see [`docs/language-landscape.md`](docs/language-landscape.md)
+* [x] Select initial languages — Fulfulde, Ewondo, Ghomala' (Bandjoun); see [rationale](docs/language-landscape.md#-selection-rationale--cla-v01s-three-languages)
+* [ ] Identify existing datasets (partially covered per-language in the landscape doc; needs a deeper pass)
 * [ ] Identify potential research partners
 * [ ] Build a community of native speakers
 * [ ] Connect with linguists and researchers
 * [ ] Define data governance principles
 * [ ] Define licensing strategy
-* [ ] Select initial languages
 * [ ] Define evaluation methodology
 
 ---
@@ -378,7 +378,15 @@ The long-term objective is to explore systems capable of processing multiple mod
 
 CLA does not currently claim to support every Cameroonian language.
 
-Initial languages will be selected based on factors including:
+**CLA v0.1's first three languages are:**
+
+* 🇨🇲 **Fulfulde** (Adamawa) — the most widely spoken indigenous language of Cameroon, lingua franca of the three northern regions
+* 🇨🇲 **Ewondo** — the dominant vehicular language of Yaoundé, the capital
+* 🇨🇲 **Ghomala' (Bandjoun)** — a major Grassfields/Bamileke language of the West Region
+
+The full research and rationale behind this selection is documented in [`docs/language-landscape.md`](docs/language-landscape.md). Corrections and additional context from native speakers and linguists are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Initial languages were selected based on factors including:
 
 * Availability of native-speaker contributors
 * Availability of existing linguistic resources
@@ -524,7 +532,7 @@ Evaluation
 Open Research
 ```
 
-Detailed contribution guidelines will be published as the project evolves.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to get involved right now. More detailed guidelines will be published as the project evolves.
 
 ---
 
