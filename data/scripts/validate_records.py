@@ -20,12 +20,13 @@ SCHEMAS_DIR = Path(__file__).resolve().parent.parent / "schemas"
 SCHEMA_FILES = {
     "text": SCHEMAS_DIR / "text-record.schema.json",
     "audio": SCHEMAS_DIR / "audio-record.schema.json",
+    "monolingual": SCHEMAS_DIR / "monolingual-document.schema.json",
 }
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--kind", choices=["text", "audio"], required=True)
+    parser.add_argument("--kind", choices=["text", "audio", "monolingual"], required=True)
     parser.add_argument("--input", required=True, type=Path, help="JSONL file to validate")
     parser.add_argument("--max-errors", type=int, default=20)
     args = parser.parse_args()

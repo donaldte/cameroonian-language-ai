@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/donaldte/cameroonian-language-ai/data/schemas/monolingual-document.schema.json",
+  "title": "CLA-Data v0.1 Monolingual Document Record",
+  "description": "Schema for a whole monolingual document (a book, story, or pamphlet) with no per-sentence translation — distinct from text-record.schema.json, which requires a French or English translation. Useful as language-modeling / corpus material, not as parallel MT training data. See docs/cla-data-schema.md.",
+  "type": "object",
+  "required": [
+    "id",
+    "language",
+    "title",
+    "text",
+    "license",
+    "license_raw",
+    "copyright_holder",
+    "source",
+    "source_organization",
+    "consent_version",
+    "validated",
+    "validated_by",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^cla_(fub|ewo|bbj)_[0-9a-fA-F-]{36}$"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["fub", "ewo", "bbj"]
+    },
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "license": {
+      "type": "string",
+      "description": "Normalized CC license, assumed version 4.0 unless the source states otherwise (Bloom Library's default) — see the ingestion script/changelog for per-document verification status.",
+      "enum": ["CC-BY-4.0", "CC-BY-NC-4.0", "CC-BY-NC-SA-4.0", "CC-BY-SA-4.0"]
+    },
+    "license_raw": {
+      "type": "string",
+      "description": "The exact license string as given by the source dataset, before normalization (e.g. 'cc-by-nc-sa')."
+    },
+    "copyright_holder": {
+      "type": "string",
+      "description": "The actual rights holder for this specific document, as stated by the source (e.g. 'CABTAL', not the platform that aggregated it)."
+    },
+    "external_id": {
+      "type": ["string", "null"],
+      "description": "The source dataset's own identifier for this document (e.g. Bloom Library's bookInstanceId), for traceability."
+    },
+    "page_count": {
+      "type": ["integer", "null"]
+    },
+    "source": {
+      "type": "string",
+      "enum": ["existing_dataset", "institutional_partner"]
+    },
+    "source_organization": {
+      "type": "string"
+    },
+    "consent_version": {
+      "type": "string"
+    },
+    "validated": {
+      "type": "boolean"
+    },
+    "validated_by": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

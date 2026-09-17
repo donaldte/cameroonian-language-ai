@@ -125,6 +125,36 @@ Full JSON Schema: [`data/schemas/audio-record.schema.json`](../data/schemas/audi
 
 ---
 
+## Monolingual document schema
+
+Some existing sources (e.g. Bloom Library books) provide whole documents in a target language with **no per-sentence French/English translation** — these don't fit the text-record schema above, which requires a translation. For this material, use the separate monolingual-document schema instead:
+
+```json
+{
+  "id": "cla_fub_1a2b3c4d-...",
+  "language": "fub",
+  "title": "Goso the Teacher",
+  "text": "Full document text in the target language...",
+  "license": "CC-BY-4.0",
+  "license_raw": "cc-by",
+  "copyright_holder": "Copyright © 2014, American University of Nigeria",
+  "external_id": "bookInstanceId-from-source",
+  "page_count": 17,
+  "source": "existing_dataset",
+  "source_organization": "sil-ai/bloom-lm (Hugging Face)",
+  "consent_version": "dataset:sil-ai/bloom-lm",
+  "validated": false,
+  "validated_by": [],
+  "created_at": "2026-09-17T12:00:00Z"
+}
+```
+
+Key differences from the text-record schema: no translation fields at all; `license` allows a wider set (`CC-BY-4.0`, `CC-BY-NC-4.0`, `CC-BY-NC-SA-4.0`, `CC-BY-SA-4.0`) since existing third-party documents carry whatever license their original author chose; `copyright_holder` is required and must record the **actual** rights holder (e.g. an organization named in the source), never CLA or the platform that aggregated it. This data is useful for language-modeling/corpus purposes, not as parallel MT training data.
+
+Full JSON Schema: [`data/schemas/monolingual-document.schema.json`](../data/schemas/monolingual-document.schema.json)
+
+---
+
 ## Validation
 
 A record becomes `"validated": true` only once **at least two independent native-speaker validators**, other than the original contributor, confirm that:

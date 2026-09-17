@@ -292,7 +292,7 @@ data/
 * [x] Define the CLA-Data record schemas (text + audio) — [`docs/cla-data-schema.md`](docs/cla-data-schema.md)
 * [x] Scaffold the `data/` directory for the three selected languages
 * [x] Build validation/ingestion scripts — [`data/scripts/`](data/scripts/)
-* [x] Ingest first real records — 15,190 Ghomala' (Bandjoun) text pairs from an existing Apache-2.0 dataset ([changelog](data/languages/bbj/metadata/CHANGELOG.md)); Fulfulde/Ewondo pending gated-dataset access
+* [x] Ingest first real records — 15,190 Ghomala' (Bandjoun) text pairs (Apache-2.0, [changelog](data/languages/bbj/metadata/CHANGELOG.md)); 7 Fulfulde + 1 Ewondo monolingual documents from sil-ai/bloom-lm (small — see [language-landscape.md](docs/language-landscape.md) for why Fulfulde/Ewondo still lack real parallel-text coverage)
 * [ ] Native-speaker validation pass on ingested records (all currently `validated: false`)
 * [ ] Build a collection tool (`CLA Collect`) — for original contributions once/if the lightweight/existing-dataset routes are exhausted
 
