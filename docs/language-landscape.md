@@ -143,20 +143,23 @@ Ghomala'
 │                            "Ghomálá'" and the related "Ghomala: South: Bameka" variety —
 │                            GRN states its content is under Creative Commons, exact variant
 │                            and applicability to Bandjoun specifically needs verification
-├── Existing translation datasets: None found publicly. The NT translation above is a
-│                                    candidate *if* the Bible Society of Cameroon grants
-│                                    permission — see "Potential partners" below
-├── Hugging Face datasets: None found. Confirmed **absent** from sil-ai/bloom-lm's 363-language
-│                          coverage (unlike Fulfulde and Ewondo, see their profiles above) —
-│                          Ghomala' remains the least digitally represented of CLA's three
-│                          languages by every measure found so far
+├── Existing translation datasets: ✅ **[stfotso/french-ghomala-bandjoun](https://huggingface.co/datasets/stfotso/french-ghomala-bandjoun)**
+│                                    — 15,190 French↔Ghomala' Bandjoun sentence pairs, Apache-2.0,
+│                                    ingested into CLA-Data 2026-09-17 (not yet native-speaker
+│                                    validated). See data/languages/bbj/metadata/CHANGELOG.md.
+│                                    The Bible Society NT translation is a separate, additional
+│                                    candidate *if* permission is confirmed — see "Potential
+│                                    partners" below
+├── Hugging Face datasets: **[stfotso/french-ghomala-bandjoun](https://huggingface.co/datasets/stfotso/french-ghomala-bandjoun)**
+│                          (see above). Confirmed **absent** from sil-ai/bloom-lm's 363-language
+│                          coverage (unlike Fulfulde and Ewondo, see their profiles above)
 ├── Existing ASR models: None found publicly
 ├── Existing translation models: None found publicly
 └── Existing academic research: Documented in Glottolog (ghom1247) and OLAC language
                                  archive records
 ```
 
-**Why it matters:** Ghomala' (specifically the Bandjoun variety) is the founder's required language for CLA — it anchors the project in the Bamileke/Grassfields language family (West Region), the most linguistically dense and commercially dynamic part of Cameroon, and is essentially undocumented in existing NLP resources, which is exactly the gap CLA exists to close.
+**Why it matters:** Ghomala' (specifically the Bandjoun variety) is the founder's required language for CLA — it anchors the project in the Bamileke/Grassfields language family (West Region), the most linguistically dense and commercially dynamic part of Cameroon. Text/translation resources turned out to be less scarce than the initial pass suggested (see the 15,190-pair dataset above), but audio/ASR remains essentially undocumented — that gap is still exactly what CLA exists to close.
 
 ---
 
@@ -253,6 +256,7 @@ Together these three span three different regions (North, Centre, West), three d
 - [Global Recordings Network — Ghomálá' language page](https://globalrecordings.net/en/language/bbj)
 - [Bloom Library — Terms of Use](https://bloom.sil.org/terms)
 - [Hugging Face — sil-ai/bloom-lm dataset](https://huggingface.co/datasets/sil-ai/bloom-lm)
+- [Hugging Face — stfotso/french-ghomala-bandjoun dataset](https://huggingface.co/datasets/stfotso/french-ghomala-bandjoun)
 
 ---
 
@@ -264,9 +268,11 @@ Together these three span three different regions (North, Centre, West), three d
 - [x] Reach out to Alliance Biblique du Cameroun, GRN, and SIL Cameroun/Bloom Library — founder reports verbal agreement obtained for non-commercial use from all three, plus a government contact
 - [ ] **Get each partner agreement confirmed in writing** (email/letter/published dataset terms) before any content is ingested under the `institutional_partner` / CC-BY-NC-4.0 tier — see [data-consent-and-licensing.md §8](data-consent-and-licensing.md#8-partner-sourced-content)
 - [ ] Get the actual file exports from Alliance Biblique du Cameroun (Bible text) and GRN (audio) directly from the organizations — their websites are bot-protected and will not be scraped
-- [ ] Create a Hugging Face account, accept sil-ai/bloom-lm's terms, and pull the `ewo`/`fub` subsets (+ `bloom-speech` for audio) to inspect quality before ingestion
+- [ ] Accept sil-ai/bloom-lm's gated-access terms on huggingface.co (an API token isn't enough for a gated dataset) and pull the `ewo`/`fub` subsets (+ `bloom-speech` for audio) to inspect quality before ingestion
+- [x] Ingested `stfotso/french-ghomala-bandjoun` (15,190 records, Apache-2.0) into `data/languages/bbj/text/` — see [data/languages/bbj/metadata/CHANGELOG.md](../data/languages/bbj/metadata/CHANGELOG.md)
+- [ ] Native-speaker validation pass on the ingested Ghomala' records (all currently `validated: false`)
 - [ ] Clarify which specific government resource/agency was agreed with, and what exactly it covers
-- [ ] Verify Ghomala' dictionary/corpus status directly with SIL Cameroon or West Region linguists — still the least-covered of the three languages by every measure found so far
+- [ ] Verify Ghomala' audio/ASR resources directly with SIL Cameroon or West Region linguists — text is now covered (see above) but audio remains the least-covered modality for this language
 - [ ] Confirm whether NLLB-200's `fuv_Latn` (Fula) is linguistically close enough to Adamawa Fulfulde (`fub`) to be a usable baseline
 - [ ] Identify 2–3 additional potential community/research partners per selected language (universities, diaspora associations)
 - [x] Draft `CLA-Data v0.1` schema and consent/licensing policy (see [README §CLA-Data](../README.md#-cla-data))
