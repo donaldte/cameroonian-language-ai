@@ -30,9 +30,10 @@ These fields appear, with the same meaning, in both the text and audio schemas:
 | `id` | string | ✅ | Unique record ID, format `cla_{lang}_{uuid4}` (e.g. `cla_bbj_3f2a1c9e-...`) |
 | `language` | string (enum) | ✅ | One of the ISO 639-3 codes above |
 | `source` | string (enum) | ✅ | How the content originated — see [Source values](#source-values) |
-| `license` | string | ✅ | Always `"CC-BY-4.0"` for CLA v0.1 (see [licensing policy](data-consent-and-licensing.md)) |
-| `consent_version` | string | ✅ | Version of the consent policy the contributor agreed to (e.g. `"v1.0"`) — lets CLA know exactly what a contributor consented to even after the policy evolves |
-| `contributor_id` | string \| null | ✅ | Pseudonymous ID of the contributor who submitted the record. Never a real name — see consent policy |
+| `license` | string (enum) | ✅ | `"CC-BY-4.0"` for individual contributions, `"CC-BY-NC-4.0"` for institutional partner content (see [licensing policy §2, §8](data-consent-and-licensing.md#2-license)) |
+| `consent_version` | string | ✅ | Version of the consent policy the contributor agreed to (e.g. `"v1.0"`), or a partner-agreement reference (e.g. `"partner:abc-2026-09"`) for `institutional_partner` records |
+| `contributor_id` | string \| null | ✅ | Pseudonymous ID of the contributor who submitted the record. Never a real name — see consent policy. `null` for `institutional_partner` records |
+| `source_organization` | string \| null | ⛔ required when `source` is `institutional_partner`, `null` otherwise | Name of the institutional partner the record came from (e.g. `"Alliance Biblique du Cameroun"`) |
 | `speaker_id` | string \| null | ⛔ optional | Pseudonymous ID of the *speaker*, if different from the contributor (e.g. someone transcribing another person's speech) |
 | `validated` | boolean | ✅ | `true` only once the record has passed [validation](#validation) |
 | `validated_by` | array of strings | ✅ | Pseudonymous IDs of validators who reviewed this record (empty until validated) |
@@ -40,7 +41,7 @@ These fields appear, with the same meaning, in both the text and audio schemas:
 
 ### Source values
 
-`original` (contributor wrote/said it themselves) · `elicited` (produced in response to a CLA prompt) · `translated_from_existing` (translation of an existing public-domain or appropriately licensed text) · `public_domain_text` (verbatim public-domain text, e.g. out-of-copyright literature) — any other source must be documented in an issue before use.
+`original` (contributor wrote/said it themselves) · `elicited` (produced in response to a CLA prompt) · `translated_from_existing` (translation of an existing public-domain or appropriately licensed text) · `public_domain_text` (verbatim public-domain text, e.g. out-of-copyright literature) · `institutional_partner` (content obtained directly from a partner organization under a documented agreement — see [data-consent-and-licensing.md §8](data-consent-and-licensing.md#8-partner-sourced-content), never scraped from a partner's website) — any other source must be documented in an issue before use.
 
 ---
 
@@ -57,6 +58,7 @@ These fields appear, with the same meaning, in both the text and audio schemas:
   "license": "CC-BY-4.0",
   "consent_version": "v1.0",
   "contributor_id": "contrib_0042",
+  "source_organization": null,
   "speaker_id": null,
   "validated": false,
   "validated_by": [],
@@ -92,6 +94,7 @@ Full JSON Schema: [`data/schemas/text-record.schema.json`](../data/schemas/text-
   "license": "CC-BY-4.0",
   "consent_version": "v1.0",
   "contributor_id": "contrib_0017",
+  "source_organization": null,
   "speaker_id": "contrib_0017",
   "speaker_demographics": {
     "age_range": "25-34",
@@ -119,6 +122,62 @@ Additional required fields beyond the [common fields](#common-fields):
 Full JSON Schema: [`data/schemas/audio-record.schema.json`](../data/schemas/audio-record.schema.json)
 
 **Audio format standard:** mono WAV, 16-bit PCM, 16kHz sample rate. This matches common ASR training pipelines (e.g. Whisper, wav2vec2) and keeps file sizes manageable for a community-driven, low-bandwidth collection effort.
+
+---
+
+## Monolingual document schema
+
+Some existing sources (e.g. Bloom Library books) provide whole documents in a target language with **no per-sentence French/English translation** — these don't fit the text-record schema above, which requires a translation. For this material, use the separate monolingual-document schema instead:
+
+```json
+{
+  "id": "cla_fub_1a2b3c4d-...",
+  "language": "fub",
+  "title": "Goso the Teacher",
+  "text": "Full document text in the target language...",
+  "license": "CC-BY-4.0",
+  "license_raw": "cc-by",
+  "copyright_holder": "Copyright © 2014, American University of Nigeria",
+  "external_id": "bookInstanceId-from-source",
+  "page_count": 17,
+  "source": "existing_dataset",
+  "source_organization": "sil-ai/bloom-lm (Hugging Face)",
+  "consent_version": "dataset:sil-ai/bloom-lm",
+  "validated": false,
+  "validated_by": [],
+  "created_at": "2026-09-17T12:00:00Z"
+}
+```
+
+Key differences from the text-record schema: no translation fields at all; `license` allows a wider set (`CC-BY-4.0`, `CC-BY-NC-4.0`, `CC-BY-NC-SA-4.0`, `CC-BY-SA-4.0`) since existing third-party documents carry whatever license their original author chose; `copyright_holder` is required and must record the **actual** rights holder (e.g. an organization named in the source), never CLA or the platform that aggregated it. This data is useful for language-modeling/corpus purposes, not as parallel MT training data.
+
+Full JSON Schema: [`data/schemas/monolingual-document.schema.json`](../data/schemas/monolingual-document.schema.json)
+
+---
+
+## Lexicon entry schema
+
+Bilingual dictionaries/glossaries (headword → translation, with a part-of-speech tag) are a third distinct shape — one French headword typically has several senses/synonyms, each becoming its own record sharing `headword_fr` and an incrementing `sense_index`:
+
+```json
+{
+  "id": "cla_fub_1a2b3c4d-...",
+  "language": "fub",
+  "headword_fr": "abandonner la route",
+  "pos": "Verbe",
+  "text": "wosaade",
+  "sense_index": 0,
+  "source": "institutional_partner",
+  "source_organization": "Name withheld pending written confirmation (via SIL Cameroun)",
+  "license": "CC-BY-NC-4.0",
+  "consent_version": "partner:example-2026-09-pending",
+  "validated": false,
+  "validated_by": [],
+  "created_at": "2026-09-17T12:00:00Z"
+}
+```
+
+`pos` is preserved exactly as given by the source lexicon (e.g. `Verbe`, `Nom`, `adj`, or grammatical-pronoun tags like `dpn`, `adj/rpn/interrog`) rather than normalized into a fixed taxonomy, since tag sets are source-specific and normalizing risks losing information. Full JSON Schema: [`data/schemas/lexicon-entry.schema.json`](../data/schemas/lexicon-entry.schema.json). Generic ingestion tooling: [`data/scripts/ingest_lexicon.py`](../data/scripts/ingest_lexicon.py) (takes an already-parsed `{headword_fr, pos, text}` JSONL — source-specific PDF/column extraction is a separate step, kept out of this repo until the source's license is confirmed).
 
 ---
 

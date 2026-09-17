@@ -52,17 +52,22 @@
     },
     "source": {
       "type": "string",
-      "enum": ["read_speech", "spontaneous", "elicited"]
+      "enum": ["read_speech", "spontaneous", "elicited", "institutional_partner", "existing_dataset"]
     },
     "license": {
       "type": "string",
-      "const": "CC-BY-4.0"
+      "enum": ["CC-BY-4.0", "CC-BY-NC-4.0", "Apache-2.0"]
     },
     "consent_version": {
-      "type": "string"
+      "type": "string",
+      "description": "One of: the individual-contributor consent policy version (e.g. 'v1.0'); a documented partner agreement reference (e.g. 'partner:grn-2026-09') for institutional_partner records; or 'dataset:<hf-dataset-id>' for existing_dataset records, where the dataset's own published license is the operative permission (no CLA consent process applies)."
     },
     "contributor_id": {
       "type": ["string", "null"]
+    },
+    "source_organization": {
+      "type": ["string", "null"],
+      "description": "For institutional_partner: the partner's name. For existing_dataset: the dataset's identifier. Null otherwise."
     },
     "speaker_id": {
       "type": ["string", "null"]

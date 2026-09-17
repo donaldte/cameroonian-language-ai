@@ -21,7 +21,8 @@ data/
 │       └── metadata/   Language-level stats: contributor counts, validation logs, dataset changelog
 │
 ├── schemas/    JSON Schema files used to validate every record before it is merged
-└── scripts/    Validation / ingestion / export tooling (not yet written)
+└── scripts/    ingest_hf_text_dataset.py (pull + convert an existing HF dataset),
+                validate_records.py (validate a JSONL file against the schemas)
 ```
 
 Each language folder uses its **ISO 639-3 code** (`fub`, `ewo`, `bbj`) as the directory name, matching the `language` field in every record — see each language's own `README.md` for the human-readable name and a link to its landscape profile.

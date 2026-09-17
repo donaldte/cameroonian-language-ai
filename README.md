@@ -286,14 +286,15 @@ data/
 │       └── metadata/
 │
 ├── schemas/     ← done: text-record.schema.json, audio-record.schema.json
-└── scripts/     ← not yet written
+└── scripts/     ← done: ingest_hf_text_dataset.py, validate_records.py
 ```
 
 * [x] Define the CLA-Data record schemas (text + audio) — [`docs/cla-data-schema.md`](docs/cla-data-schema.md)
 * [x] Scaffold the `data/` directory for the three selected languages
-* [ ] Build validation/ingestion scripts
-* [ ] Build a collection tool (`CLA Collect`)
-* [ ] Collect and validate the first records
+* [x] Build validation/ingestion scripts — [`data/scripts/`](data/scripts/)
+* [x] Ingest first real records — 15,190 Ghomala' (Bandjoun) text pairs (Apache-2.0, [changelog](data/languages/bbj/metadata/CHANGELOG.md)); 7 Fulfulde + 1 Ewondo monolingual documents from sil-ai/bloom-lm (small — see [language-landscape.md](docs/language-landscape.md) for why Fulfulde/Ewondo still lack real parallel-text coverage)
+* [ ] Native-speaker validation pass on ingested records (all currently `validated: false`)
+* [ ] Build a collection tool (`CLA Collect`) — for original contributions once/if the lightweight/existing-dataset routes are exhausted
 
 CLA will initially focus on a **small number of languages** rather than attempting to cover all Cameroonian languages immediately.
 
