@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/donaldte/cameroonian-language-ai/data/schemas/audio-record.schema.json",
+  "title": "CLA-Data v0.1 Audio Record",
+  "description": "Schema for a single audio record in a CLA-Data dataset. See docs/cla-data-schema.md for the full specification.",
+  "type": "object",
+  "required": [
+    "id",
+    "language",
+    "audio_path",
+    "transcription",
+    "duration_sec",
+    "sample_rate",
+    "source",
+    "license",
+    "consent_version",
+    "contributor_id",
+    "validated",
+    "validated_by",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^cla_(fub|ewo|bbj)_[0-9a-fA-F-]{36}$"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["fub", "ewo", "bbj"]
+    },
+    "audio_path": {
+      "type": "string",
+      "pattern": "^speech/.+\\.wav$"
+    },
+    "transcription": {
+      "type": "string",
+      "minLength": 1
+    },
+    "translation_fr": {
+      "type": ["string", "null"]
+    },
+    "translation_en": {
+      "type": ["string", "null"]
+    },
+    "duration_sec": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "sample_rate": {
+      "type": "integer",
+      "const": 16000
+    },
+    "source": {
+      "type": "string",
+      "enum": ["read_speech", "spontaneous", "elicited"]
+    },
+    "license": {
+      "type": "string",
+      "const": "CC-BY-4.0"
+    },
+    "consent_version": {
+      "type": "string"
+    },
+    "contributor_id": {
+      "type": ["string", "null"]
+    },
+    "speaker_id": {
+      "type": ["string", "null"]
+    },
+    "speaker_demographics": {
+      "type": ["object", "null"],
+      "properties": {
+        "age_range": { "type": ["string", "null"] },
+        "gender": { "type": ["string", "null"] },
+        "region": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "validated": {
+      "type": "boolean"
+    },
+    "validated_by": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "anyOf": [
+    { "required": ["translation_fr"] },
+    { "required": ["translation_en"] }
+  ],
+  "additionalProperties": false
+}
