@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/donaldte/cameroonian-language-ai/data/schemas/lexicon-entry.schema.json",
+  "title": "CLA-Data v0.1 Lexicon Entry",
+  "description": "Schema for a single bilingual dictionary/glossary entry (headword -> one translation sense), distinct from text-record.schema.json (sentence pairs) and monolingual-document.schema.json (whole documents). Multiple senses/synonyms for the same headword are separate records sharing the same headword_fr and sense_index sequence. See docs/cla-data-schema.md.",
+  "type": "object",
+  "required": [
+    "id",
+    "language",
+    "headword_fr",
+    "pos",
+    "text",
+    "sense_index",
+    "source",
+    "license",
+    "consent_version",
+    "validated",
+    "validated_by",
+    "created_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^cla_(fub|ewo|bbj)_[0-9a-fA-F-]{36}$"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["fub", "ewo", "bbj"]
+    },
+    "headword_fr": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The French headword or expression being defined (e.g. 'abandonner la route')."
+    },
+    "pos": {
+      "type": "string",
+      "description": "Part-of-speech / grammatical tag as given by the source lexicon (e.g. 'Verbe', 'Nom', 'adj', 'dpn', 'adj/rpn/interrog'). Preserved as-is rather than normalized, since the tag set is source-specific."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The target-language (fub/ewo/bbj) term or expression for this sense."
+    },
+    "sense_index": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "0-based position of this sense among all senses/synonyms listed for the same headword_fr, in source order."
+    },
+    "source": {
+      "type": "string",
+      "enum": ["original", "institutional_partner", "existing_dataset"]
+    },
+    "source_organization": {
+      "type": ["string", "null"],
+      "description": "Rights holder / institutional partner / dataset citation, when source is institutional_partner or existing_dataset. Null for original."
+    },
+    "license": {
+      "type": "string",
+      "enum": ["CC-BY-4.0", "CC-BY-NC-4.0", "CC-BY-NC-SA-4.0", "CC-BY-SA-4.0", "Apache-2.0"]
+    },
+    "consent_version": {
+      "type": "string"
+    },
+    "validated": {
+      "type": "boolean"
+    },
+    "validated_by": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}

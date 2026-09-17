@@ -5,9 +5,12 @@ pip install -r data/scripts/requirements.txt
 ```
 
 - **`ingest_hf_text_dataset.py`** — converts an existing, appropriately-licensed Hugging Face text dataset into CLA-Data text records (`source: "existing_dataset"`). See the script's docstring for the field-mapping CLI options and a worked example (Ghomala' Bandjoun).
-- **`validate_records.py`** — validates a JSONL file of text or audio records against the JSON Schemas in [`../schemas/`](../schemas/). Run this on every ingested or collected file before it's merged:
+- **`ingest_bloom_lm.py`** — one-off script that pulls sil-ai/bloom-lm's raw JSON files directly (bypassing its legacy loading script) into `monolingual-document` records.
+- **`ingest_lexicon.py`** — converts an already-parsed `{headword_fr, pos, text}` JSONL (one sense per line) into `lexicon-entry` records with ids, provenance and license metadata. Source-specific extraction (e.g. parsing a dictionary PDF's column layout) is a separate step, deliberately kept out of this repo until that source's license is confirmed in writing.
+- **`validate_records.py`** — validates a JSONL file of text, audio, monolingual-document, or lexicon-entry records against the JSON Schemas in [`../schemas/`](../schemas/). Run this on every ingested or collected file before it's merged:
   ```bash
   python3 data/scripts/validate_records.py --kind text --input data/languages/bbj/text/some-file.jsonl
+  python3 data/scripts/validate_records.py --kind lexicon --input data/languages/fub/text/some-lexicon.jsonl
   ```
 
 Both scripts assume the record schemas defined in [`docs/cla-data-schema.md`](../../docs/cla-data-schema.md).

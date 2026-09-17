@@ -54,7 +54,16 @@ Sources for this table are listed in [References](#-references) below.
 Fulfulde (Adamawa)
 ├── Speakers: ~2.5M L1 in Cameroon, ~5.18M total users (Ethnologue, 2019)
 ├── Writing system: Latin script (official orthography); historical Ajami (Arabic-based)
-├── Existing dictionaries: Fulfulde-French lexicons (SIL, missionary sources)
+├── Existing dictionaries: ✅ **Found 2026-09-17**: a 208-page French↔Fulfulde
+│                          dictionary (~17,200 translation entries across
+│                          ~10,500 French headwords, PDF metadata credits a
+│                          linguist first name "Urs", compiled Feb 2020,
+│                          formatting consistent with SIL/missionary work).
+│                          Parsed into structured form for internal review
+│                          only — **not ingested into CLA-Data**, no written
+│                          permission from the rights holder yet. See
+│                          "Potential partners" below and
+│                          data/scripts/ingest_lexicon.py (ready once cleared)
 ├── Existing text corpora: A full Bible ("FB — Fulfulde Bible") exists via YouVersion/bible.com,
 │                          copyright held by Alliance Biblique du Cameroun (Bible Society of
 │                          Cameroon). ⚠️ Confirmed as of 2026-09 to be **absent from eBible.org's
@@ -179,6 +188,7 @@ Before deciding CLA needed to collect data from scratch, a deeper pass was done 
 | **SIL International / Bloom Library** | ✅ **Retrieved 2026-09-17**: [sil-ai/bloom-lm](https://huggingface.co/datasets/sil-ai/bloom-lm) via Hugging Face (no scraping needed). Actual yield was small: **1 Ewondo document, 7 Fulfulde documents** (whole books/pamphlets, not sentence-parallel), `bbj` absent entirely | Per-document CC license (CC-BY, CC-BY-NC, or CC-BY-NC-SA), real copyright holders CABTAL / American University of Nigeria, not SIL. Ingested under the new monolingual-document schema |
 | **SIL Cameroon** | General linguistic documentation (orthography, dictionaries) referenced across all three languages' profiles above | Not itself a data source, but a natural first point of contact for Ghomala' specifically, which has no confirmed digital resource anywhere so far |
 | **Government of Cameroon** (contact per founder) | Unspecified — likely related to the Ministry of Education's "Read at Home" national-languages initiative mentioned in the Ghomala' profile above | Not yet detailed — needs the founder to specify which resource/agency and what exactly was agreed |
+| **"Urs" (linguist, identity/organization not yet confirmed)** | A 208-page French↔Fulfulde dictionary (~17,200 entries), found by the founder, PDF metadata names the author "Urs" (compiled Feb 2020) — formatting strongly resembles SIL/missionary linguistic work | ⚠️ **Not yet authorized.** The founder initially described this as their own work; PDF metadata contradicted that, and the founder then confirmed "Urs" is the actual author and the file was obtained elsewhere. **No written permission exists yet.** Parsed for internal review only (not committed to the repo); do not publish or use in any model until a written agreement is obtained, ideally by identifying "Urs" (full name/organization) and asking directly, or via SIL Cameroun |
 
 **Practical implication:** the highest-leverage near-term action is not scraping or generating this data, but **reaching out to Alliance Biblique du Cameroun and SIL Cameroon directly** to ask about a data-sharing agreement or collaboration. If even one of them agrees, CLA could gain a reviewed, parallel-aligned text corpus (Bible text is imperfect — narrow domain, archaic register — but it's real, validated, native-language text at real scale) far faster than any from-scratch collection effort. This is tracked as an open item below and reflects Phase 0's existing "Identify potential research partners" roadmap item.
 
@@ -281,3 +291,5 @@ Together these three span three different regions (North, Centre, West), three d
 - [ ] Confirm whether NLLB-200's `fuv_Latn` (Fula) is linguistically close enough to Adamawa Fulfulde (`fub`) to be a usable baseline
 - [ ] Identify 2–3 additional potential community/research partners per selected language (universities, diaspora associations)
 - [x] Draft `CLA-Data v0.1` schema and consent/licensing policy (see [README §CLA-Data](../README.md#-cla-data))
+- [x] Design a `lexicon-entry` schema (headword → sense) for bilingual dictionaries, distinct from sentence-pair and whole-document schemas — see [`data/schemas/lexicon-entry.schema.json`](../data/schemas/lexicon-entry.schema.json)
+- [ ] **Get written permission for the "Urs" Fulfulde-French dictionary** (~17,200 entries, parsed but unpublished) before any use — identify the author's full name/organization (likely SIL) and ask directly; see [Potential partners](#-potential-partners-found-during-resource-hunt-2026-09-17)

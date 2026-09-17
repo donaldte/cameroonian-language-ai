@@ -155,6 +155,32 @@ Full JSON Schema: [`data/schemas/monolingual-document.schema.json`](../data/sche
 
 ---
 
+## Lexicon entry schema
+
+Bilingual dictionaries/glossaries (headword → translation, with a part-of-speech tag) are a third distinct shape — one French headword typically has several senses/synonyms, each becoming its own record sharing `headword_fr` and an incrementing `sense_index`:
+
+```json
+{
+  "id": "cla_fub_1a2b3c4d-...",
+  "language": "fub",
+  "headword_fr": "abandonner la route",
+  "pos": "Verbe",
+  "text": "wosaade",
+  "sense_index": 0,
+  "source": "institutional_partner",
+  "source_organization": "Name withheld pending written confirmation (via SIL Cameroun)",
+  "license": "CC-BY-NC-4.0",
+  "consent_version": "partner:example-2026-09-pending",
+  "validated": false,
+  "validated_by": [],
+  "created_at": "2026-09-17T12:00:00Z"
+}
+```
+
+`pos` is preserved exactly as given by the source lexicon (e.g. `Verbe`, `Nom`, `adj`, or grammatical-pronoun tags like `dpn`, `adj/rpn/interrog`) rather than normalized into a fixed taxonomy, since tag sets are source-specific and normalizing risks losing information. Full JSON Schema: [`data/schemas/lexicon-entry.schema.json`](../data/schemas/lexicon-entry.schema.json). Generic ingestion tooling: [`data/scripts/ingest_lexicon.py`](../data/scripts/ingest_lexicon.py) (takes an already-parsed `{headword_fr, pos, text}` JSONL — source-specific PDF/column extraction is a separate step, kept out of this repo until the source's license is confirmed).
+
+---
+
 ## Validation
 
 A record becomes `"validated": true` only once **at least two independent native-speaker validators**, other than the original contributor, confirm that:
