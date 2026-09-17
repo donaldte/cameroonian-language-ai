@@ -52,17 +52,22 @@
     },
     "source": {
       "type": "string",
-      "enum": ["read_speech", "spontaneous", "elicited"]
+      "enum": ["read_speech", "spontaneous", "elicited", "institutional_partner"]
     },
     "license": {
       "type": "string",
-      "const": "CC-BY-4.0"
+      "enum": ["CC-BY-4.0", "CC-BY-NC-4.0"]
     },
     "consent_version": {
-      "type": "string"
+      "type": "string",
+      "description": "Either the individual-contributor consent policy version (e.g. 'v1.0'), or a reference to a documented partner agreement (e.g. 'partner:grn-2026-09') for institutional_partner records."
     },
     "contributor_id": {
       "type": ["string", "null"]
+    },
+    "source_organization": {
+      "type": ["string", "null"],
+      "description": "Name of the institutional partner this record came from, required when source is institutional_partner, null otherwise."
     },
     "speaker_id": {
       "type": ["string", "null"]

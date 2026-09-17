@@ -74,10 +74,14 @@ Fulfulde (Adamawa)
 │                                    parallel corpus. The Bible translation above is a candidate
 │                                    *if* Alliance Biblique du Cameroun grants permission — see
 │                                    "Potential partners" below
-├── Hugging Face datasets: None specific to Cameroonian Adamawa Fulfulde (`fub`) found;
-│                          NLLB-200 / FLORES-200 support "Fulah" but under codes tied to
-│                          Nigerian/West African Fulfulde varieties (`fuv`), not confirmed
-│                          equivalent to `fub` — needs verification before reuse
+├── Hugging Face datasets: **[sil-ai/bloom-lm](https://huggingface.co/datasets/sil-ai/bloom-lm)
+│                          confirms `fub` coverage** (also `bloom-speech`/`bloom-vist`/
+│                          `bloom-captioning` variants for audio/image data) — text/multimodal
+│                          content with a per-entry CC license field (cc-by-4.0, cc-by-nc-4.0,
+│                          etc.). Gated: requires a Hugging Face account and accepting SIL's
+│                          usage terms before download — not yet retrieved. NLLB-200/FLORES-200
+│                          support "Fulah" but under codes tied to Nigerian/West African
+│                          Fulfulde varieties (`fuv`), not confirmed equivalent to `fub`
 ├── Existing ASR models: None found publicly for `fub`
 ├── Existing translation models: Possibly usable as a starting point via NLLB `fuv_Latn`,
 │                                 but linguistic distance to Adamawa Fulfulde is unverified
@@ -106,7 +110,10 @@ Ewondo
 │                                    The NT translation above is a candidate *if* Alliance
 │                                    Biblique du Cameroun grants permission — see "Potential
 │                                    partners" below
-├── Hugging Face datasets: None found
+├── Hugging Face datasets: **[sil-ai/bloom-lm](https://huggingface.co/datasets/sil-ai/bloom-lm)
+│                          confirms `ewo` coverage** (also `bloom-speech`/`bloom-vist`/
+│                          `bloom-captioning` variants) — same gated-access caveat as Fulfulde
+│                          above
 ├── Existing ASR models: None found publicly
 ├── Existing translation models: None found publicly
 └── Existing academic research: Covered in Beti-Pahuin linguistics literature; cited in
@@ -139,7 +146,10 @@ Ghomala'
 ├── Existing translation datasets: None found publicly. The NT translation above is a
 │                                    candidate *if* the Bible Society of Cameroon grants
 │                                    permission — see "Potential partners" below
-├── Hugging Face datasets: None found
+├── Hugging Face datasets: None found. Confirmed **absent** from sil-ai/bloom-lm's 363-language
+│                          coverage (unlike Fulfulde and Ewondo, see their profiles above) —
+│                          Ghomala' remains the least digitally represented of CLA's three
+│                          languages by every measure found so far
 ├── Existing ASR models: None found publicly
 ├── Existing translation models: None found publicly
 └── Existing academic research: Documented in Glottolog (ghom1247) and OLAC language
@@ -152,14 +162,17 @@ Ghomala'
 
 ## 🤝 Potential partners (found during resource hunt, 2026-09-17)
 
-Before deciding CLA needed to collect data from scratch, a deeper pass was done specifically to check whether existing, legally reusable material already covers Fulfulde, Ewondo, or Ghomala' (Bandjoun). The short answer: **substantial translated content already exists for all three languages, but almost all of it is held under standard copyright by mission/church organizations, not under an open license** — so it cannot be used for CLA-Data as-is. This does, however, surface concrete organizations worth contacting as partners rather than working around:
+Before deciding CLA needed to collect data from scratch, a deeper pass was done specifically to check whether existing, legally reusable material already covers Fulfulde, Ewondo, or Ghomala' (Bandjoun). The short answer: **substantial translated content already exists for all three languages**, held by a mix of church/mission organizations, SIL, and (per the project founder) government contacts.
+
+**Update:** the project founder reports having reached direct agreement with Alliance Biblique du Cameroun, Global Recordings Network, SIL Cameroun/Bloom Library, and a government contact, for non-commercial use (CC-BY-NC-4.0 tier — see [data-consent-and-licensing.md §8](data-consent-and-licensing.md#8-partner-sourced-content)). These agreements are **not yet documented in writing anywhere CLA controls** — getting each one confirmed in writing (an email, a letter, a dataset's own published terms) is an open item before any content is ingested under this tier, consistent with the policy's own requirement that a verbal understanding isn't sufficient on its own.
 
 | Organization | What they have | License status |
 |---|---|---|
-| **Alliance Biblique du Cameroun** (Bible Society of Cameroon) | A full Bible in Fulfulde, a 2012 New Testament in Ewondo, and a New Testament in Ghomala' — i.e. translated, reviewed, parallel-aligned religious text in **all three** of CLA's selected languages, distributed via YouVersion/bible.com | Standard copyright (confirmed absent from eBible.org's openly-redistributable list for all three) — **would require reaching out for permission or a data-sharing agreement** |
-| **Global Recordings Network (GRN)** | Audio recordings + scripts for Ghomálá' (including the Bameka variety) and several Fulfulde varieties | States content is shared under Creative Commons, but the exact license variant and coverage of the Cameroon/Bandjoun/Adamawa-specific varieties needs direct confirmation (their license page was unreachable during this pass) |
-| **SIL International / Bloom Library** | Children's books tagged for Ewondo and Fulfulde (Adamawa/Western Niger); Ghomala' coverage unconfirmed | Per-book license (often CC-BY or CC-BY-NC), varies by book — needs manual review on bloomlibrary.org |
-| **SIL Cameroon** | General linguistic documentation (orthography, dictionaries) referenced across all three languages' profiles above | Not itself a data source, but a natural first point of contact — they are the organization most likely to have institutional relationships with all three language communities |
+| **Alliance Biblique du Cameroun** (Bible Society of Cameroon) | A full Bible in Fulfulde, a 2012 New Testament in Ewondo, and a New Testament in Ghomala' — i.e. translated, reviewed, parallel-aligned religious text in **all three** of CLA's selected languages, distributed via YouVersion/bible.com | Standard copyright; not on eBible.org's open list. Founder reports agreement for non-commercial use — needs written confirmation. **bible.com itself has active bot-detection and will not be scraped** — the correct path is to request a direct file export (e.g. USFM/plain text) from the organization, or have them submit to eBible.org |
+| **Global Recordings Network (GRN)** | Audio recordings + scripts for Ghomálá' (including the Bameka variety) and several Fulfulde varieties | States content is shared under Creative Commons; exact variant/coverage unconfirmed. Founder reports agreement — needs written confirmation. **globalrecordings.net also has active bot-detection** — request a direct bulk export instead of scraping the site |
+| **SIL International / Bloom Library** | Children's books tagged for Ewondo and Fulfulde (Adamawa/Western Niger); Ghomala' coverage unconfirmed | Already published as a proper dataset — **[sil-ai/bloom-lm](https://huggingface.co/datasets/sil-ai/bloom-lm) on Hugging Face confirms `ewo` and `fub` coverage** (not `bbj`), per-entry CC license field. Gated behind a Hugging Face account + accepting SIL's terms — no scraping needed, just proper access |
+| **SIL Cameroon** | General linguistic documentation (orthography, dictionaries) referenced across all three languages' profiles above | Not itself a data source, but a natural first point of contact for Ghomala' specifically, which has no confirmed digital resource anywhere so far |
+| **Government of Cameroon** (contact per founder) | Unspecified — likely related to the Ministry of Education's "Read at Home" national-languages initiative mentioned in the Ghomala' profile above | Not yet detailed — needs the founder to specify which resource/agency and what exactly was agreed |
 
 **Practical implication:** the highest-leverage near-term action is not scraping or generating this data, but **reaching out to Alliance Biblique du Cameroun and SIL Cameroon directly** to ask about a data-sharing agreement or collaboration. If even one of them agrees, CLA could gain a reviewed, parallel-aligned text corpus (Bible text is imperfect — narrow domain, archaic register — but it's real, validated, native-language text at real scale) far faster than any from-scratch collection effort. This is tracked as an open item below and reflects Phase 0's existing "Identify potential research partners" roadmap item.
 
@@ -239,6 +252,7 @@ Together these three span three different regions (North, Centre, West), three d
 - [eBible.org — Bible Translations finder](https://ebible.org/find/)
 - [Global Recordings Network — Ghomálá' language page](https://globalrecordings.net/en/language/bbj)
 - [Bloom Library — Terms of Use](https://bloom.sil.org/terms)
+- [Hugging Face — sil-ai/bloom-lm dataset](https://huggingface.co/datasets/sil-ai/bloom-lm)
 
 ---
 
@@ -247,8 +261,12 @@ Together these three span three different regions (North, Centre, West), three d
 - [ ] Open a GitHub issue to discuss and ratify this selection publicly (`CLA v0.1 — Language Landscape & Initial Language Selection`)
 - [ ] Verify Ghomala' dictionary/corpus status directly with SIL Cameroon or West Region linguists
 - [ ] Confirm whether NLLB-200's `fuv_Latn` (Fula) is linguistically close enough to Adamawa Fulfulde (`fub`) to be a usable baseline
-- [ ] Reach out to Alliance Biblique du Cameroun (Bible Society of Cameroon) and SIL Cameroon to ask about a data-sharing agreement for their existing Fulfulde/Ewondo/Ghomala' translations — see [Potential partners](#-potential-partners-found-during-resource-hunt-2026-09-17)
-- [ ] Verify GRN's exact Creative Commons license variant and its coverage of the Adamawa Fulfulde and Bandjoun Ghomala' varieties specifically
-- [ ] Manually check bloomlibrary.org for Ewondo/Fulfulde/Ghomala' books and their per-book licenses
+- [x] Reach out to Alliance Biblique du Cameroun, GRN, and SIL Cameroun/Bloom Library — founder reports verbal agreement obtained for non-commercial use from all three, plus a government contact
+- [ ] **Get each partner agreement confirmed in writing** (email/letter/published dataset terms) before any content is ingested under the `institutional_partner` / CC-BY-NC-4.0 tier — see [data-consent-and-licensing.md §8](data-consent-and-licensing.md#8-partner-sourced-content)
+- [ ] Get the actual file exports from Alliance Biblique du Cameroun (Bible text) and GRN (audio) directly from the organizations — their websites are bot-protected and will not be scraped
+- [ ] Create a Hugging Face account, accept sil-ai/bloom-lm's terms, and pull the `ewo`/`fub` subsets (+ `bloom-speech` for audio) to inspect quality before ingestion
+- [ ] Clarify which specific government resource/agency was agreed with, and what exactly it covers
+- [ ] Verify Ghomala' dictionary/corpus status directly with SIL Cameroon or West Region linguists — still the least-covered of the three languages by every measure found so far
+- [ ] Confirm whether NLLB-200's `fuv_Latn` (Fula) is linguistically close enough to Adamawa Fulfulde (`fub`) to be a usable baseline
 - [ ] Identify 2–3 additional potential community/research partners per selected language (universities, diaspora associations)
-- [ ] Begin drafting `CLA-Data v0.1` schema and consent/licensing policy (see [README §CLA-Data](../README.md#-cla-data))
+- [x] Draft `CLA-Data v0.1` schema and consent/licensing policy (see [README §CLA-Data](../README.md#-cla-data))

@@ -30,9 +30,10 @@ These fields appear, with the same meaning, in both the text and audio schemas:
 | `id` | string | ✅ | Unique record ID, format `cla_{lang}_{uuid4}` (e.g. `cla_bbj_3f2a1c9e-...`) |
 | `language` | string (enum) | ✅ | One of the ISO 639-3 codes above |
 | `source` | string (enum) | ✅ | How the content originated — see [Source values](#source-values) |
-| `license` | string | ✅ | Always `"CC-BY-4.0"` for CLA v0.1 (see [licensing policy](data-consent-and-licensing.md)) |
-| `consent_version` | string | ✅ | Version of the consent policy the contributor agreed to (e.g. `"v1.0"`) — lets CLA know exactly what a contributor consented to even after the policy evolves |
-| `contributor_id` | string \| null | ✅ | Pseudonymous ID of the contributor who submitted the record. Never a real name — see consent policy |
+| `license` | string (enum) | ✅ | `"CC-BY-4.0"` for individual contributions, `"CC-BY-NC-4.0"` for institutional partner content (see [licensing policy §2, §8](data-consent-and-licensing.md#2-license)) |
+| `consent_version` | string | ✅ | Version of the consent policy the contributor agreed to (e.g. `"v1.0"`), or a partner-agreement reference (e.g. `"partner:abc-2026-09"`) for `institutional_partner` records |
+| `contributor_id` | string \| null | ✅ | Pseudonymous ID of the contributor who submitted the record. Never a real name — see consent policy. `null` for `institutional_partner` records |
+| `source_organization` | string \| null | ⛔ required when `source` is `institutional_partner`, `null` otherwise | Name of the institutional partner the record came from (e.g. `"Alliance Biblique du Cameroun"`) |
 | `speaker_id` | string \| null | ⛔ optional | Pseudonymous ID of the *speaker*, if different from the contributor (e.g. someone transcribing another person's speech) |
 | `validated` | boolean | ✅ | `true` only once the record has passed [validation](#validation) |
 | `validated_by` | array of strings | ✅ | Pseudonymous IDs of validators who reviewed this record (empty until validated) |
@@ -40,7 +41,7 @@ These fields appear, with the same meaning, in both the text and audio schemas:
 
 ### Source values
 
-`original` (contributor wrote/said it themselves) · `elicited` (produced in response to a CLA prompt) · `translated_from_existing` (translation of an existing public-domain or appropriately licensed text) · `public_domain_text` (verbatim public-domain text, e.g. out-of-copyright literature) — any other source must be documented in an issue before use.
+`original` (contributor wrote/said it themselves) · `elicited` (produced in response to a CLA prompt) · `translated_from_existing` (translation of an existing public-domain or appropriately licensed text) · `public_domain_text` (verbatim public-domain text, e.g. out-of-copyright literature) · `institutional_partner` (content obtained directly from a partner organization under a documented agreement — see [data-consent-and-licensing.md §8](data-consent-and-licensing.md#8-partner-sourced-content), never scraped from a partner's website) — any other source must be documented in an issue before use.
 
 ---
 
@@ -57,6 +58,7 @@ These fields appear, with the same meaning, in both the text and audio schemas:
   "license": "CC-BY-4.0",
   "consent_version": "v1.0",
   "contributor_id": "contrib_0042",
+  "source_organization": null,
   "speaker_id": null,
   "validated": false,
   "validated_by": [],
@@ -92,6 +94,7 @@ Full JSON Schema: [`data/schemas/text-record.schema.json`](../data/schemas/text-
   "license": "CC-BY-4.0",
   "consent_version": "v1.0",
   "contributor_id": "contrib_0017",
+  "source_organization": null,
   "speaker_id": "contrib_0017",
   "speaker_demographics": {
     "age_range": "25-34",

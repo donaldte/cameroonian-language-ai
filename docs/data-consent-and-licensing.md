@@ -23,11 +23,28 @@ Consent must be an affirmative action (a checkbox or explicit button), never a d
 
 ## 2. License
 
-All CLA-Data contributions are published under **[CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)**.
+CLA-Data has **two license tiers**, distinguished by the `license` field on every record:
 
-Rationale: it is the de facto standard for open NLP/speech datasets (Common Voice, Masakhane, FLORES), it maximizes reuse and adoption — including by researchers and companies who might otherwise ignore Cameroonian languages entirely — and it only requires attribution, which is straightforward to give ("CLA — Cameroonian Language AI contributors").
+- **CC-BY-4.0** — the default for original contributions collected directly from individual contributors (see [§1](#1-what-contributors-are-told-informed-consent)).
+- **[CC-BY-NC-4.0](https://creativecommons.org/licenses/by-nc/4.0/)** — for content sourced from institutional partners under a non-commercial-only agreement (e.g. a church/mission organization's existing Bible translation, or a linguistic organization's audio archive). See [§8](#8-partner-sourced-content) below.
 
-This choice trades away the tighter control a non-commercial or custom license would give the community over downstream commercial use. If experience shows this is a problem (e.g. a company using CLA-Data with no reciprocity), CLA can introduce a differently-licensed tier for future contributions — but it cannot retroactively relicense data already published as CC-BY-4.0.
+Rationale for CC-BY-4.0 as the default: it is the de facto standard for open NLP/speech datasets (Common Voice, Masakhane, FLORES), it maximizes reuse and adoption — including by researchers and companies who might otherwise ignore Cameroonian languages entirely — and it only requires attribution, which is straightforward to give ("CLA — Cameroonian Language AI contributors").
+
+This choice trades away the tighter control a non-commercial or custom license would give the community over downstream commercial use for that tier. Records cannot be retroactively relicensed once published under a given tier — the `license` field on each record is permanent for that record.
+
+## 8. Partner-sourced content
+
+Some CLA-Data content does not come from individual contributors submitting through CLA's own collection process, but from **institutional partners** who hold rights to pre-existing material (a Bible translation, an audio archive, a set of children's books) and have granted CLA permission to publish it, typically on condition that it is **not used commercially**.
+
+Rules specific to this content:
+
+- It is tagged `license: "CC-BY-NC-4.0"` (or whatever more restrictive term the specific partner requires — the exact license string must never be assumed and must be confirmed per partner before ingestion).
+- `contributor_id` is `null`; a `source_organization` field (see [`docs/cla-data-schema.md`](cla-data-schema.md)) records which partner it came from.
+- `consent_version` records a reference to the partner agreement rather than the individual-contributor consent policy (e.g. `"partner:abc-2026-09"`), so it's always traceable to a specific, documented agreement — not a verbal understanding.
+- CLA does not scrape partner content from a website to obtain it, even when a partner has verbally agreed to sharing — a rights-holder's permission does not override a separate technical access control (e.g. bot-detection) that a hosting platform (not the rights holder) has put in place. Content should be obtained as a direct file export from the partner, or via a dataset the partner has already published through a proper channel (e.g. Hugging Face Hub).
+- Every partner agreement should be recorded in writing somewhere durable (an email thread, a signed letter, a dataset's own published terms) — not relied upon as a verbal claim alone — before content is ingested and published under this tier.
+
+Partners identified so far (see [`docs/language-landscape.md` § Potential partners](language-landscape.md#-potential-partners-found-during-resource-hunt-2026-09-17)): Alliance Biblique du Cameroun, Global Recordings Network, SIL Cameroun / Bloom Library. Confirming and documenting the exact terms of each agreement is an open item.
 
 Code in this repository remains **Apache-2.0** (see [LICENSE](../LICENSE)); this policy concerns datasets only.
 
