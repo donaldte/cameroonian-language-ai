@@ -55,10 +55,25 @@ Fulfulde (Adamawa)
 ├── Speakers: ~2.5M L1 in Cameroon, ~5.18M total users (Ethnologue, 2019)
 ├── Writing system: Latin script (official orthography); historical Ajami (Arabic-based)
 ├── Existing dictionaries: Fulfulde-French lexicons (SIL, missionary sources)
-├── Existing text corpora: Religious texts (Bible translations), SIL Cameroon materials
+├── Existing text corpora: A full Bible ("FB — Fulfulde Bible") exists via YouVersion/bible.com,
+│                          copyright held by Alliance Biblique du Cameroun (Bible Society of
+│                          Cameroon). ⚠️ Confirmed as of 2026-09 to be **absent from eBible.org's
+│                          openly-redistributable list** — i.e. standard copyright, not
+│                          CC-licensed. Global Recordings Network (GRN) hosts audio + scripts
+│                          for several Fulfulde varieties (Adamawa/Gombe, Western Niger, Burkina)
+│                          — GRN states its content is shared under Creative Commons, but the
+│                          exact variant and whether the Adamawa/Cameroon variety is included
+│                          needs direct verification (their copyright page returned an error
+│                          during this research pass). Bloom Library (SIL) reportedly hosts
+│                          children's books tagged for Fulfulde (Adamawa/Western Niger) —
+│                          per-book license varies, needs manual verification on bloomlibrary.org
 ├── Existing audio datasets: Known crowdsourced oral-data collection efforts targeting
-│                            Fulfulde speakers in Adamawa/Far North (early-stage, not yet public)
-├── Existing translation datasets: None found as a public, structured parallel corpus
+│                            Fulfulde speakers in Adamawa/Far North (early-stage, not yet public);
+│                            see GRN note above for a possibly-reusable existing audio source
+├── Existing translation datasets: None found as a public, structured, openly-licensed
+│                                    parallel corpus. The Bible translation above is a candidate
+│                                    *if* Alliance Biblique du Cameroun grants permission — see
+│                                    "Potential partners" below
 ├── Hugging Face datasets: None specific to Cameroonian Adamawa Fulfulde (`fub`) found;
 │                          NLLB-200 / FLORES-200 support "Fulah" but under codes tied to
 │                          Nigerian/West African Fulfulde varieties (`fuv`), not confirmed
@@ -79,10 +94,18 @@ Ewondo
 │             to several million since, and Ewondo is its dominant vehicular language)
 ├── Writing system: Latin script, standardized orthography used in Beti-Pahuin literature
 ├── Existing dictionaries: Ewondo-French dictionaries (Catholic mission tradition, 20th c.)
-├── Existing text corpora: Religious texts, some literary works, Beti-Pahuin linguistic studies
+├── Existing text corpora: A full New Testament ("NTE12 — Nouveau Testament en langue Ewondo
+│                          2012") exists via bible.com, copyright held by Alliance Biblique du
+│                          Cameroun. ⚠️ Same status as Fulfulde above: confirmed absent from
+│                          eBible.org's open list, i.e. standard copyright, not CC-licensed.
+│                          Bloom Library (SIL) reportedly hosts children's books tagged for
+│                          Ewondo — per-book license varies, needs manual verification
 ├── Existing audio datasets: Reported oral-data collection initiative including Ewondo
 │                            speakers from the Centre region (early-stage, not yet public)
-├── Existing translation datasets: None found as a public, structured parallel corpus
+├── Existing translation datasets: None found as a public, openly-licensed parallel corpus.
+│                                    The NT translation above is a candidate *if* Alliance
+│                                    Biblique du Cameroun grants permission — see "Potential
+│                                    partners" below
 ├── Hugging Face datasets: None found
 ├── Existing ASR models: None found publicly
 ├── Existing translation models: None found publicly
@@ -104,9 +127,18 @@ Ghomala'
 │                          full dictionary status needs direct verification (no confirmed
 │                          public Webonary page found during this pass)
 ├── Existing text corpora: Limited; promoted under Cameroon's Ministry of Education
-│                          "Read at Home" initiative as one of five national languages
-├── Existing audio datasets: None found publicly
-├── Existing translation datasets: None found publicly
+│                          "Read at Home" initiative as one of five national languages. A
+│                          New Testament ("NTGomala — Ghomala New Testament") exists via
+│                          bible.com, copyright held by the Bible Society of Cameroon. ⚠️
+│                          Same status as Fulfulde/Ewondo above: absent from eBible.org's
+│                          open list — standard copyright, not CC-licensed
+├── Existing audio datasets: Global Recordings Network (GRN) hosts audio + scripts for
+│                            "Ghomálá'" and the related "Ghomala: South: Bameka" variety —
+│                            GRN states its content is under Creative Commons, exact variant
+│                            and applicability to Bandjoun specifically needs verification
+├── Existing translation datasets: None found publicly. The NT translation above is a
+│                                    candidate *if* the Bible Society of Cameroon grants
+│                                    permission — see "Potential partners" below
 ├── Hugging Face datasets: None found
 ├── Existing ASR models: None found publicly
 ├── Existing translation models: None found publicly
@@ -115,6 +147,21 @@ Ghomala'
 ```
 
 **Why it matters:** Ghomala' (specifically the Bandjoun variety) is the founder's required language for CLA — it anchors the project in the Bamileke/Grassfields language family (West Region), the most linguistically dense and commercially dynamic part of Cameroon, and is essentially undocumented in existing NLP resources, which is exactly the gap CLA exists to close.
+
+---
+
+## 🤝 Potential partners (found during resource hunt, 2026-09-17)
+
+Before deciding CLA needed to collect data from scratch, a deeper pass was done specifically to check whether existing, legally reusable material already covers Fulfulde, Ewondo, or Ghomala' (Bandjoun). The short answer: **substantial translated content already exists for all three languages, but almost all of it is held under standard copyright by mission/church organizations, not under an open license** — so it cannot be used for CLA-Data as-is. This does, however, surface concrete organizations worth contacting as partners rather than working around:
+
+| Organization | What they have | License status |
+|---|---|---|
+| **Alliance Biblique du Cameroun** (Bible Society of Cameroon) | A full Bible in Fulfulde, a 2012 New Testament in Ewondo, and a New Testament in Ghomala' — i.e. translated, reviewed, parallel-aligned religious text in **all three** of CLA's selected languages, distributed via YouVersion/bible.com | Standard copyright (confirmed absent from eBible.org's openly-redistributable list for all three) — **would require reaching out for permission or a data-sharing agreement** |
+| **Global Recordings Network (GRN)** | Audio recordings + scripts for Ghomálá' (including the Bameka variety) and several Fulfulde varieties | States content is shared under Creative Commons, but the exact license variant and coverage of the Cameroon/Bandjoun/Adamawa-specific varieties needs direct confirmation (their license page was unreachable during this pass) |
+| **SIL International / Bloom Library** | Children's books tagged for Ewondo and Fulfulde (Adamawa/Western Niger); Ghomala' coverage unconfirmed | Per-book license (often CC-BY or CC-BY-NC), varies by book — needs manual review on bloomlibrary.org |
+| **SIL Cameroon** | General linguistic documentation (orthography, dictionaries) referenced across all three languages' profiles above | Not itself a data source, but a natural first point of contact — they are the organization most likely to have institutional relationships with all three language communities |
+
+**Practical implication:** the highest-leverage near-term action is not scraping or generating this data, but **reaching out to Alliance Biblique du Cameroun and SIL Cameroon directly** to ask about a data-sharing agreement or collaboration. If even one of them agrees, CLA could gain a reviewed, parallel-aligned text corpus (Bible text is imperfect — narrow domain, archaic register — but it's real, validated, native-language text at real scale) far faster than any from-scratch collection effort. This is tracked as an open item below and reflects Phase 0's existing "Identify potential research partners" roadmap item.
 
 ---
 
@@ -186,6 +233,12 @@ Together these three span three different regions (North, Centre, West), three d
 - [APiCS Online — Cameroon Pidgin English survey](https://apics-online.info/surveys/18)
 - [SIL Cameroon — Browse by Language](https://www.silcam.org/resources/browse/language/all?languageid=5)
 - [Hugging Face — masakhane collection](https://huggingface.co/masakhane)
+- [Bible.com — FB Fulfulde Bible](https://www.bible.com/versions/906-fb-fulfulde-bible)
+- [Bible.com — NTGomala Ghomala' New Testament](https://www.bible.com/versions/907-ntgomala-ghomala-new-testament)
+- [Bible.com — Ewondo languages page](https://www.bible.com/languages/ewo)
+- [eBible.org — Bible Translations finder](https://ebible.org/find/)
+- [Global Recordings Network — Ghomálá' language page](https://globalrecordings.net/en/language/bbj)
+- [Bloom Library — Terms of Use](https://bloom.sil.org/terms)
 
 ---
 
@@ -194,5 +247,8 @@ Together these three span three different regions (North, Centre, West), three d
 - [ ] Open a GitHub issue to discuss and ratify this selection publicly (`CLA v0.1 — Language Landscape & Initial Language Selection`)
 - [ ] Verify Ghomala' dictionary/corpus status directly with SIL Cameroon or West Region linguists
 - [ ] Confirm whether NLLB-200's `fuv_Latn` (Fula) is linguistically close enough to Adamawa Fulfulde (`fub`) to be a usable baseline
-- [ ] Identify 2–3 potential community/research partners per selected language (universities, churches/missions with translation history, diaspora associations)
+- [ ] Reach out to Alliance Biblique du Cameroun (Bible Society of Cameroon) and SIL Cameroon to ask about a data-sharing agreement for their existing Fulfulde/Ewondo/Ghomala' translations — see [Potential partners](#-potential-partners-found-during-resource-hunt-2026-09-17)
+- [ ] Verify GRN's exact Creative Commons license variant and its coverage of the Adamawa Fulfulde and Bandjoun Ghomala' varieties specifically
+- [ ] Manually check bloomlibrary.org for Ewondo/Fulfulde/Ghomala' books and their per-book licenses
+- [ ] Identify 2–3 additional potential community/research partners per selected language (universities, diaspora associations)
 - [ ] Begin drafting `CLA-Data v0.1` schema and consent/licensing policy (see [README §CLA-Data](../README.md#-cla-data))
